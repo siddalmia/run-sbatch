@@ -11,7 +11,7 @@ EXAMPLES
 
 - If you have python program you normally run as `python3 job.py --job_arg1 arg1 --job_arg2 arg2 arg3`, you can use `run-sbatch` to run it as a slurm batched process - `run-sbatch.sh --gpu 1 --job-name test_script --job-lang python3 --job job.py --job-opts "--job_arg1 arg1 --job_arg2 arg2 arg3"` 
 
-- It will support any language you provide what to use to call the `job` in `--job-lang`.
+- It will support any language what you to use to call `job` if it is provided with `--job-lang`.
 
 OPTIONS (Currently Supported):
 ```
