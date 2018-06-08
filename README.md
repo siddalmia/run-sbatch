@@ -28,4 +28,4 @@ Make sure your `$PATH`, `$LD_LIBRARY_PATH` and other environment variables are s
 
 Thanks to kaldi for providing a wonderful shell argument parser (https://github.com/kaldi-asr/kaldi).
 
-The current support is limited, please feel free to add (don't forget to send in a pull request :)) or email me if you need any more options/features.
+The current support is **limited**, please feel free to add (don't forget to send in a pull request :)) or email me if you need any more options/features.
