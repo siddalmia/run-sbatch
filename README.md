@@ -4,16 +4,17 @@ Wrapper over sbatch
 This is a simple wrapper over sbatch which allows you to run slurm batched jobs.
 
 Before running makes sure :
-- change email domain to your own domain
+- change email domain to your own domain (currently set to andrew.cmu.edu)
 - add the following to your bashrc/bash_profile : `export PATH="$PATH_TO_THIS_SCRIPT":$PATH` 
 
-```
-  run-sbatch --job job.sh
-  run-sbatch --gpu 0 --job-name test_script --job job.sh --job-opts "--job_arg1 arg1 --job_arg2 arg2 arg3"
-  run-sbatch --gpu 0 --job-name test_script --job-lang python3 --job job.py --job-opts "--job_arg1 arg1 --job_arg2 arg2 arg3"
-```
+EXAMPLES
+- If you have shell script that you normally as `./job.sh --job_arg1 arg1 --job_arg2 arg2 arg3`, you can use `run-sbatch` to run it as a slurm batched process - `run-sbatch --gpu 0 --job-name test_script --job job.sh --job-opts "--job_arg1 arg1 --job_arg2 arg2 arg3"` 
 
-OPTIONS CURRENTLY SUPPORTED :
+- If you have python program you normally run as `python3 job.py --job_arg1 arg1 --job_arg2 arg2 arg3`, you can use `run-sbatch` to run it as a slurm batched process - `run-sbatch.sh --gpu 0 --job-name test_script --job-lang python3 --job job.py --job-opts "--job_arg1 arg1 --job_arg2 arg2 arg3"` 
+
+- It will support any language you provide what to use to call the `job` in `--job-lang`.
+
+OPTIONS (Currently Supported):
 ```
               --exclude  <exclude_list> : List of nodes to exclude (eg. islpc18,islpc19 or islpc[30-33]).
               --nodes    <node_list>    : List of nodes to include (eg. islpc18,islpc19 or islpc[30-33]).
@@ -24,4 +25,6 @@ OPTIONS CURRENTLY SUPPORTED :
               --gpu      <ngpus>        : Number of GPUs[0-n] needed for the job, Default is 1.
 ```
 
-Thanks to kaldi for providing a shell argument parser (https://github.com/kaldi-asr/kaldi).
+Make sure your `$PATH`, `$LD_LIBRARY_PATH` and other environment variables are set such that it would run the code will execute in the assigned node (eg. if you are using Anaconda or have CUDA in a non-traditional place)
+
+Thanks to kaldi for providing a wonderful shell argument parser (https://github.com/kaldi-asr/kaldi).
