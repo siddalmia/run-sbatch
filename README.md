@@ -26,6 +26,6 @@ OPTIONS (Currently Supported):
 
 Make sure your `$PATH`, `$LD_LIBRARY_PATH` and other environment variables are set such that it would run the code will execute in the assigned node (eg. if you are using Anaconda or have CUDA in a non-traditional place).
 
-Thanks to kaldi for providing a wonderful shell argument parser (https://github.com/kaldi-asr/kaldi).
+Thanks to the authors of Kaldi (https://github.com/kaldi-asr/kaldi) for providing a wonderful shell argument parser.
 
 The current support is **limited**, please feel free to add (don't forget to send in a pull request :)) or email me if you need any more options/features.
