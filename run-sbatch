@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Copyright 2018 Carnegie Mellon University (Author: Siddharth Dalmia)
+# Email id : sdalmia@andrew.cmu.edu
 # Apache 2.0
 
 email=${USER}@andrew.cmu.edu
