@@ -1,7 +1,6 @@
-# run-sbatch
-Wrapper over sbatch
+# run-sbatch (wrapper over sbatch)
 
-This is a simple wrapper over sbatch which allows you to run slurm batched jobs.
+This is a simple wrapper over sbatch which allows you to run slurm batched jobs without changing any of your existing scripts/code.
 
 Before running makes sure :
 - change email domain to your own domain (currently set to andrew.cmu.edu)
@@ -25,6 +24,8 @@ OPTIONS (Currently Supported):
               --gpu      <ngpus>        : Number of GPUs[0-n] needed for the job, Default is 1.
 ```
 
-Make sure your `$PATH`, `$LD_LIBRARY_PATH` and other environment variables are set such that it would run the code will execute in the assigned node (eg. if you are using Anaconda or have CUDA in a non-traditional place)
+Make sure your `$PATH`, `$LD_LIBRARY_PATH` and other environment variables are set such that it would run the code will execute in the assigned node (eg. if you are using Anaconda or have CUDA in a non-traditional place).
 
 Thanks to kaldi for providing a wonderful shell argument parser (https://github.com/kaldi-asr/kaldi).
+
+The current support is limited, please feel free to add (don't forget to send in a pull request :)) or email me if you need any more options/features.
