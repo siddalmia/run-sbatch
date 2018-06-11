@@ -62,7 +62,7 @@ if [ $job_lang == "bash" ]; then
                                                         --mail-user=$email --output=$output --error=$output $job_name ./$job $job_opts
 
     sbatch --gres=gpu:$gpu $nodes $exclude --kill-on-invalid-dep=yes --no-requeue --get-user-env -D $workdir --mail-type=FAIL \
-                                                        --mail-user=$email --output=$output --error=$output $job_name ./$job $options
+                                                        --mail-user=$email --output=$output --error=$output $job_name ./$job $job_opts
 else
 
     if [ ! -f $job ]; then
