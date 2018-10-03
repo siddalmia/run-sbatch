@@ -9,7 +9,6 @@ workdir=`readlink -f .`
 gpu=1
 nodes=
 exclude=
-partition=
 job_name=
 job_log=
 job=
@@ -23,8 +22,7 @@ help_message="Run slurm batch jobs using this script : run-sbatch [OPTIONS] --jo
   eg. For python codes : run-sbatch --gpu 0 --job-name test_script --job-lang python3 --job job.py --job-opts \"--job_arg1 arg1 --job_arg2 arg2 arg3\"
 
   OPTIONS : 
-              --partition <partition>   : List of partitions (eg. priority,standard,unkillable).
-              --exclude  <exclude_list> : List of nodes to exclude (eg. islpc18,islpc19 or islpc[30-33]). 
+              --exclude  <exclude_list> : List of nodes to exclude (eg. islpc18,islpc19 or islpc[30-33]).
               --nodes    <node_list>    : List of nodes to include (eg. islpc18,islpc19 or islpc[30-33]).
               --job-name <job_name>     : Name of the job (also sets the slurm output filename).
               --job-lang <job_lang>     : Language the job is written, typically how you call the job (eg. python or python3 or perl etc.), Default is bash.
@@ -46,9 +44,6 @@ output="${timestamp}_slurm_%j.out"
 if [ ! -z "$exclude" ]; then
         exclude="--exclude ${exclude}"
 fi 
-if [ ! -z "$partition" ]; then
-        partition="--partition ${partition}"
-fi 
 if [ ! -z "$nodes" ]; then
         nodes="-w ${nodes}"
 fi
@@ -63,10 +58,10 @@ fi
 cd $workdir
 
 if [ $job_lang == "bash" ]; then
-    echo sbatch --gres=gpu:$gpu $partition $nodes $exclude --kill-on-invalid-dep=yes --no-requeue --get-user-env -D $workdir --mail-type=FAIL \
+    echo sbatch --gres=gpu:$gpu $nodes $exclude --kill-on-invalid-dep=yes --no-requeue --get-user-env -D $workdir --mail-type=FAIL \
                                                         --mail-user=$email --output=$output --error=$output $job_name ./$job $job_opts
 
-    sbatch --gres=gpu:$gpu $partition $nodes $exclude --kill-on-invalid-dep=yes --no-requeue --get-user-env -D $workdir --mail-type=FAIL \
+    sbatch --gres=gpu:$gpu $nodes $exclude --kill-on-invalid-dep=yes --no-requeue --get-user-env -D $workdir --mail-type=FAIL \
                                                         --mail-user=$email --output=$output --error=$output $job_name ./$job $job_opts
 else
 
@@ -76,10 +71,10 @@ else
         printf "$help_message\n"
         exit 1
     fi
-    echo sbatch --gres=gpu:$gpu $partition $nodes $exclude --kill-on-invalid-dep=yes --no-requeue --get-user-env -D $workdir --mail-type=FAIL \
+    echo sbatch --gres=gpu:$gpu $nodes $exclude --kill-on-invalid-dep=yes --no-requeue --get-user-env -D $workdir --mail-type=FAIL \
                                                 --mail-user=$email --output=$output --error=$output $job_name ${job_lang} $job $job_opts
 
-    sbatch --gres=gpu:$gpu $partition $nodes $exclude --kill-on-invalid-dep=yes --no-requeue --get-user-env -D $workdir --mail-type=FAIL \
+    sbatch --gres=gpu:$gpu $nodes $exclude --kill-on-invalid-dep=yes --no-requeue --get-user-env -D $workdir --mail-type=FAIL \
                                                                 --mail-user=$email --output=$output --error=$output $job_name <<EOF 
 #!/bin/bash
 ${job_lang} $job $job_opts
